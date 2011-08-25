@@ -14,12 +14,13 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 @interface TSGBackupListLoader ()
 
 @property (readonly, copy) NSURL *keyURL;
-@property (readwrite, copy) TSGBackupListLoaderCallback callback;
+@property (readwrite, copy) TSGBackupListLoaderCallback itemCallback;
+@property (readwrite, copy) TSGBackupListLoaderFinishedCallback finishedCallback;
 @end
 
 @implementation TSGBackupListLoader
 
-@synthesize keyURL = i_keyURL, callback = i_callback;
+@synthesize keyURL = i_keyURL, itemCallback = i_callback, finishedCallback = i_finishedCallback;
 
 - (id)initWithKeyURL:(NSURL *)theKeyURL;
 {
@@ -30,9 +31,10 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
     return self;
 }
 
-- (void)loadListWithCallback:(TSGBackupListLoaderCallback)theCallback;
+- (void)loadListWithItemCallback:(TSGBackupListLoaderCallback)theItemCallback finishedCallback:(TSGBackupListLoaderFinishedCallback)theFinishedCallback;
 {
-    self.callback = theCallback;
+    self.itemCallback = theItemCallback;
+    self.finishedCallback = theFinishedCallback;
     NSTask *task = [[[NSTask alloc] init] autorelease];
     task.launchPath = TARSNAP_LOCATION;
     task.arguments = [NSArray arrayWithObjects:@"-v", @"--list-archives", @"--keyfile", [self.keyURL path], nil];
@@ -66,15 +68,19 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
         NSDate *date = [NSDate dateWithNaturalLanguageString:dateStr];
         TSGBackup *backupItem = [TSGBackup backupWithName:name date:date];
 
-        self.callback(backupItem);
+        self.itemCallback(backupItem);
     }
-    self.callback = nil;
+    [[self retain] autorelease];
+    self.finishedCallback();
+    self.itemCallback = nil;
+    self.finishedCallback = nil;
 }
 
 - (void)dealloc;
 {
     [i_keyURL release];
     [i_callback release];
+    [i_finishedCallback release];
     
     [super dealloc];
 }

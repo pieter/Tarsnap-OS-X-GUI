@@ -13,11 +13,12 @@
 @interface TSGDocument ()
 - (void)loadBackupData;
 @property (readwrite, retain) TSGBackupListLoader *loader;
+@property (readwrite, assign, getter=isLoading) BOOL loading;
 @end
 
 @implementation TSGDocument
 
-@synthesize backupsController = i_backupsController, loader = i_loader;
+@synthesize backupsController = i_backupsController, loader = i_loader, loading = i_loading;
 
 - (NSString *)windowNibName
 {
@@ -51,9 +52,13 @@
 {
     self.loader = [[[TSGBackupListLoader alloc] initWithKeyURL:self.fileURL] autorelease];
     
-    [self.loader loadListWithCallback:^(TSGBackup *item) {
+    [self.loader loadListWithItemCallback:^(TSGBackup *item) {
         [self.backupsController addObject:item]; 
+    } finishedCallback:^() {
+        self.loader = nil;
+        self.loading = NO;
     }];
+    self.loading = YES;
 }
 
 - (IBAction)deleteSelectedBackups:(id)theSender;

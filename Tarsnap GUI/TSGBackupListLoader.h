@@ -11,10 +11,11 @@
 #import "TSGBackup.h"
 
 typedef void (^TSGBackupListLoaderCallback)(TSGBackup *backupItem);
+typedef void (^TSGBackupListLoaderFinishedCallback)();
 
 @interface TSGBackupListLoader : NSObject
 
 - (id)initWithKeyURL:(NSURL *)theKeyURL;
-- (void)loadListWithCallback:(TSGBackupListLoaderCallback)theCallback;
+- (void)loadListWithItemCallback:(TSGBackupListLoaderCallback)theItemCallback finishedCallback:(TSGBackupListLoaderFinishedCallback)theFinishedCallback;
 
 @end

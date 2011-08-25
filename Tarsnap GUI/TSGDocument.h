@@ -12,6 +12,7 @@
 }
 
 @property (retain) IBOutlet NSArrayController *backupsController;
+@property (readonly, assign, getter=isLoading) BOOL loading;
 
 - (IBAction)deleteSelectedBackups:(id)theSender;
 
