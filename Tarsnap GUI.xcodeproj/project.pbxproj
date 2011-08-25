@@ -19,6 +19,8 @@
 		F5102A121406CC4B00FB2B68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5102A101406CC4B00FB2B68 /* InfoPlist.strings */; };
 		F5102A141406CC4B00FB2B68 /* Tarsnap_GUITests.h in Resources */ = {isa = PBXBuildFile; fileRef = F5102A131406CC4B00FB2B68 /* Tarsnap_GUITests.h */; };
 		F5102A161406CC4B00FB2B68 /* Tarsnap_GUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5102A151406CC4B00FB2B68 /* Tarsnap_GUITests.m */; };
+		F5F8C5141406D21B00FE5539 /* TSGBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8C5131406D21B00FE5539 /* TSGBackup.m */; };
+		F5F8C5181406D46300FE5539 /* TSGBackupListLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8C5171406D46300FE5539 /* TSGBackupListLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,10 @@
 		F5102A111406CC4B00FB2B68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5102A131406CC4B00FB2B68 /* Tarsnap_GUITests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tarsnap_GUITests.h; sourceTree = "<group>"; };
 		F5102A151406CC4B00FB2B68 /* Tarsnap_GUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tarsnap_GUITests.m; sourceTree = "<group>"; };
+		F5F8C5121406D21B00FE5539 /* TSGBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGBackup.h; sourceTree = "<group>"; };
+		F5F8C5131406D21B00FE5539 /* TSGBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGBackup.m; sourceTree = "<group>"; };
+		F5F8C5161406D46300FE5539 /* TSGBackupListLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGBackupListLoader.h; sourceTree = "<group>"; };
+		F5F8C5171406D46300FE5539 /* TSGBackupListLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGBackupListLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,10 @@
 				F51029FC1406CC4B00FB2B68 /* TSGDocument.xib */,
 				F51029FF1406CC4B00FB2B68 /* MainMenu.xib */,
 				F51029EE1406CC4B00FB2B68 /* Supporting Files */,
+				F5F8C5121406D21B00FE5539 /* TSGBackup.h */,
+				F5F8C5131406D21B00FE5539 /* TSGBackup.m */,
+				F5F8C5161406D46300FE5539 /* TSGBackupListLoader.h */,
+				F5F8C5171406D46300FE5539 /* TSGBackupListLoader.m */,
 			);
 			path = "Tarsnap GUI";
 			sourceTree = "<group>";
@@ -265,6 +275,8 @@
 			files = (
 				F51029F41406CC4B00FB2B68 /* main.m in Sources */,
 				F51029FB1406CC4B00FB2B68 /* TSGDocument.m in Sources */,
+				F5F8C5141406D21B00FE5539 /* TSGBackup.m in Sources */,
+				F5F8C5181406D46300FE5539 /* TSGBackupListLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +456,7 @@
 				F5102A1B1406CC4B00FB2B68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F5102A1C1406CC4B00FB2B68 /* Build configuration list for PBXNativeTarget "Tarsnap GUITests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +465,7 @@
 				F5102A1E1406CC4B00FB2B68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

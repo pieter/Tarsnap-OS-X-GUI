@@ -7,8 +7,17 @@
 //
 
 #import "TSGDocument.h"
+#import "TSGBackup.h"
+#import "TSGBackupListLoader.h"
+
+@interface TSGDocument ()
+- (void)loadBackupData;
+@property (readwrite, retain) TSGBackupListLoader *loader;
+@end
 
 @implementation TSGDocument
+
+@synthesize backupsController = i_backupsController, loader = i_loader;
 
 - (id)init
 {
@@ -31,30 +40,17 @@
 {
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
+    
+    [self loadBackupData];
 }
 
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-    /*
-     Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-    You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-    */
-    if (outError) {
-        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
+    if (![absoluteURL isFileURL]) {
+        if (outError) *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:readErr userInfo:[NSDictionary dictionaryWithObject:@"Unable to read from URL's" forKey:NSLocalizedDescriptionKey]];
+        return NO;
     }
-    return nil;
-}
-
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
-{
-    /*
-    Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-    You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-    If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-    */
-    if (outError) {
-        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
-    }
+    
     return YES;
 }
 
@@ -63,4 +59,44 @@
     return YES;
 }
 
+- (void)loadBackupData;
+{
+    NSLog(@"Loading backups :), %@", self.backupsController);
+    self.loader = [[[TSGBackupListLoader alloc] initWithKeyURL:self.fileURL] autorelease];
+    [self.loader loadListWithCallback:^(TSGBackup *item) {
+        NSLog(@"Got item: %@", item);
+        [self.backupsController addObject:item]; 
+    }];
+}
+
+- (IBAction)deleteSelectedBackups:(id)theSender;
+{
+    NSArray *selectedBackups = [self.backupsController selectedObjects];
+    NSArray *selectedNames = [selectedBackups valueForKey:@"name"];
+    if ([selectedNames count] == 0)
+        return;
+
+    NSString *warning = nil;
+    if ([selectedNames count] == 1)
+        warning = [NSString stringWithFormat:@"Are you sure you want to delete '%@'?", [selectedNames objectAtIndex:0]];
+    else
+        warning = [NSString stringWithFormat:@"Are you sure you want to delete %lu backups?", [selectedNames count]];
+
+    NSAlert *alert = [NSAlert alertWithMessageText:warning defaultButton:@"Delete" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"This action is irreversible"];
+    alert.alertStyle = NSCriticalAlertStyle;
+    CFRetain(selectedNames);
+    [alert beginSheetModalForWindow:[[[self windowControllers] objectAtIndex:0] window] modalDelegate:self didEndSelector:@selector(backupDeleteAlertDidEnd:returnCode:contextInfo:) contextInfo:(void *)selectedNames];
+}
+
+- (void)backupDeleteAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+{
+    NSArray *selectedNames = (NSArray *)contextInfo;
+    [[selectedNames retain] autorelease];
+    CFRelease(selectedNames);
+    
+    if (returnCode == NSAlertAlternateReturn)
+        return;
+    
+    NSLog(@"Deleting backups: %@", selectedNames);
+}
 @end

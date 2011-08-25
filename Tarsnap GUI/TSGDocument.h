@@ -11,4 +11,8 @@
 @interface TSGDocument : NSDocument {
 }
 
+@property (retain) IBOutlet NSArrayController *backupsController;
+
+- (IBAction)deleteSelectedBackups:(id)theSender;
+
 @end
