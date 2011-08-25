@@ -19,28 +19,14 @@
 
 @synthesize backupsController = i_backupsController, loader = i_loader;
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Add your subclass-specific initialization here.
-        // If an error occurs here, send a [self release] message and return nil.
-    }
-    return self;
-}
-
 - (NSString *)windowNibName
 {
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
     return @"TSGDocument";
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
-    // Add any code here that needs to be executed once the windowController has loaded the document's window.
-    
     [self loadBackupData];
 }
 
@@ -50,6 +36,8 @@
         if (outError) *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:readErr userInfo:[NSDictionary dictionaryWithObject:@"Unable to read from URL's" forKey:NSLocalizedDescriptionKey]];
         return NO;
     }
+    
+    // We don't actually do anything here, we just need the fileURL property for later.
     
     return YES;
 }
@@ -61,10 +49,8 @@
 
 - (void)loadBackupData;
 {
-    NSLog(@"Loading backups :), %@", self.backupsController);
     self.loader = [[[TSGBackupListLoader alloc] initWithKeyURL:self.fileURL] autorelease];
     [self.loader loadListWithCallback:^(TSGBackup *item) {
-        NSLog(@"Got item: %@", item);
         [self.backupsController addObject:item]; 
     }];
 }
@@ -98,5 +84,6 @@
         return;
     
     NSLog(@"Deleting backups: %@", selectedNames);
+    // TODO: Actually implement deleting the backups
 }
 @end

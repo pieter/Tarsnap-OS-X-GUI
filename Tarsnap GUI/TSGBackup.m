@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+// This is a simple data class without any real logic
+
 #import "TSGBackup.h"
 
 @implementation TSGBackup

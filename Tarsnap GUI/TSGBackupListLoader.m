@@ -8,6 +8,7 @@
 
 #import "TSGBackupListLoader.h"
 
+// TODO: Automatically locate tarsnap, or ship it with the app
 static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 
 @interface TSGBackupListLoader ()
@@ -31,7 +32,6 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 
 - (void)loadListWithCallback:(TSGBackupListLoaderCallback)theCallback;
 {
-    NSLog(@"Starting list... Callback: %p", &theCallback);
     self.callback = theCallback;
     NSTask *task = [[[NSTask alloc] init] autorelease];
     task.launchPath = TARSNAP_LOCATION;
@@ -42,6 +42,8 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
     task.standardOutput = pipe;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tarsnapDidFinish:) name:NSFileHandleReadToEndOfFileCompletionNotification object:readHandle];
+    
+    // TODO: Handle incremental loading of backup names
     [readHandle readToEndOfFileInBackgroundAndNotify];
     [task launch];
 }
@@ -50,19 +52,20 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 {
     NSData *theData = [[theNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
     NSString *dataAsString = [[[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding] autorelease];
-    NSLog(@"Did finish receiving files: %@ %@", [theNotification object], theData);
-    NSLog(@"Length: %lu", [theData length]);
-    NSLog(@"Data: %@",  dataAsString);
+    // FIXME: handle potential errors here, such as not conforming to NSUTF8StringEncoding
+    
     NSArray *items = [dataAsString componentsSeparatedByString:@"\n"];
     for (NSString *item in items) {
+        // Skip small items, such as empty newlines.
         if ([item length] < 2)
             continue;
+
         NSArray *components = [item componentsSeparatedByString:@"\t"];
         NSString *name = [components objectAtIndex:0];
         NSString *dateStr = [components objectAtIndex:1];
         NSDate *date = [NSDate dateWithNaturalLanguageString:dateStr];
-        TSGBackup *backupItem = [TSGBackup backupWithName:[components objectAtIndex:0] date:date];
-        NSLog(@"Backup item: %@.", backupItem);
+        TSGBackup *backupItem = [TSGBackup backupWithName:name date:date];
+
         self.callback(backupItem);
     }
 }
