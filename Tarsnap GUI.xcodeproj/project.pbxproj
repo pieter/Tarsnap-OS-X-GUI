@@ -1,0 +1,459 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F51029E81406CC4B00FB2B68 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51029E71406CC4B00FB2B68 /* Cocoa.framework */; };
+		F51029F21406CC4B00FB2B68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F51029F01406CC4B00FB2B68 /* InfoPlist.strings */; };
+		F51029F41406CC4B00FB2B68 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F51029F31406CC4B00FB2B68 /* main.m */; };
+		F51029F81406CC4B00FB2B68 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F51029F61406CC4B00FB2B68 /* Credits.rtf */; };
+		F51029FB1406CC4B00FB2B68 /* TSGDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = F51029FA1406CC4B00FB2B68 /* TSGDocument.m */; };
+		F51029FE1406CC4B00FB2B68 /* TSGDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51029FC1406CC4B00FB2B68 /* TSGDocument.xib */; };
+		F5102A011406CC4B00FB2B68 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51029FF1406CC4B00FB2B68 /* MainMenu.xib */; };
+		F5102A091406CC4B00FB2B68 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5102A081406CC4B00FB2B68 /* SenTestingKit.framework */; };
+		F5102A0A1406CC4B00FB2B68 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51029E71406CC4B00FB2B68 /* Cocoa.framework */; };
+		F5102A121406CC4B00FB2B68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5102A101406CC4B00FB2B68 /* InfoPlist.strings */; };
+		F5102A141406CC4B00FB2B68 /* Tarsnap_GUITests.h in Resources */ = {isa = PBXBuildFile; fileRef = F5102A131406CC4B00FB2B68 /* Tarsnap_GUITests.h */; };
+		F5102A161406CC4B00FB2B68 /* Tarsnap_GUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5102A151406CC4B00FB2B68 /* Tarsnap_GUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F5102A0B1406CC4B00FB2B68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F51029DA1406CC4B00FB2B68 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F51029E21406CC4B00FB2B68;
+			remoteInfo = "Tarsnap GUI";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F51029E31406CC4B00FB2B68 /* Tarsnap GUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tarsnap GUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F51029E71406CC4B00FB2B68 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		F51029EA1406CC4B00FB2B68 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		F51029EB1406CC4B00FB2B68 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F51029EC1406CC4B00FB2B68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F51029EF1406CC4B00FB2B68 /* Tarsnap GUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tarsnap GUI-Info.plist"; sourceTree = "<group>"; };
+		F51029F11406CC4B00FB2B68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F51029F31406CC4B00FB2B68 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F51029F51406CC4B00FB2B68 /* Tarsnap GUI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tarsnap GUI-Prefix.pch"; sourceTree = "<group>"; };
+		F51029F71406CC4B00FB2B68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F51029F91406CC4B00FB2B68 /* TSGDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGDocument.h; sourceTree = "<group>"; };
+		F51029FA1406CC4B00FB2B68 /* TSGDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGDocument.m; sourceTree = "<group>"; };
+		F51029FD1406CC4B00FB2B68 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TSGDocument.xib; sourceTree = "<group>"; };
+		F5102A001406CC4B00FB2B68 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F5102A071406CC4B00FB2B68 /* Tarsnap GUITests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tarsnap GUITests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5102A081406CC4B00FB2B68 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F5102A0F1406CC4B00FB2B68 /* Tarsnap GUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tarsnap GUITests-Info.plist"; sourceTree = "<group>"; };
+		F5102A111406CC4B00FB2B68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F5102A131406CC4B00FB2B68 /* Tarsnap_GUITests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tarsnap_GUITests.h; sourceTree = "<group>"; };
+		F5102A151406CC4B00FB2B68 /* Tarsnap_GUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tarsnap_GUITests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F51029E01406CC4B00FB2B68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F51029E81406CC4B00FB2B68 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5102A031406CC4B00FB2B68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5102A091406CC4B00FB2B68 /* SenTestingKit.framework in Frameworks */,
+				F5102A0A1406CC4B00FB2B68 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F51029D81406CC4B00FB2B68 = {
+			isa = PBXGroup;
+			children = (
+				F51029ED1406CC4B00FB2B68 /* Tarsnap GUI */,
+				F5102A0D1406CC4B00FB2B68 /* Tarsnap GUITests */,
+				F51029E61406CC4B00FB2B68 /* Frameworks */,
+				F51029E41406CC4B00FB2B68 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F51029E41406CC4B00FB2B68 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F51029E31406CC4B00FB2B68 /* Tarsnap GUI.app */,
+				F5102A071406CC4B00FB2B68 /* Tarsnap GUITests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F51029E61406CC4B00FB2B68 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F51029E71406CC4B00FB2B68 /* Cocoa.framework */,
+				F5102A081406CC4B00FB2B68 /* SenTestingKit.framework */,
+				F51029E91406CC4B00FB2B68 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F51029E91406CC4B00FB2B68 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F51029EA1406CC4B00FB2B68 /* AppKit.framework */,
+				F51029EB1406CC4B00FB2B68 /* CoreData.framework */,
+				F51029EC1406CC4B00FB2B68 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		F51029ED1406CC4B00FB2B68 /* Tarsnap GUI */ = {
+			isa = PBXGroup;
+			children = (
+				F51029F91406CC4B00FB2B68 /* TSGDocument.h */,
+				F51029FA1406CC4B00FB2B68 /* TSGDocument.m */,
+				F51029FC1406CC4B00FB2B68 /* TSGDocument.xib */,
+				F51029FF1406CC4B00FB2B68 /* MainMenu.xib */,
+				F51029EE1406CC4B00FB2B68 /* Supporting Files */,
+			);
+			path = "Tarsnap GUI";
+			sourceTree = "<group>";
+		};
+		F51029EE1406CC4B00FB2B68 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F51029EF1406CC4B00FB2B68 /* Tarsnap GUI-Info.plist */,
+				F51029F01406CC4B00FB2B68 /* InfoPlist.strings */,
+				F51029F31406CC4B00FB2B68 /* main.m */,
+				F51029F51406CC4B00FB2B68 /* Tarsnap GUI-Prefix.pch */,
+				F51029F61406CC4B00FB2B68 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F5102A0D1406CC4B00FB2B68 /* Tarsnap GUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F5102A131406CC4B00FB2B68 /* Tarsnap_GUITests.h */,
+				F5102A151406CC4B00FB2B68 /* Tarsnap_GUITests.m */,
+				F5102A0E1406CC4B00FB2B68 /* Supporting Files */,
+			);
+			path = "Tarsnap GUITests";
+			sourceTree = "<group>";
+		};
+		F5102A0E1406CC4B00FB2B68 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F5102A0F1406CC4B00FB2B68 /* Tarsnap GUITests-Info.plist */,
+				F5102A101406CC4B00FB2B68 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F51029E21406CC4B00FB2B68 /* Tarsnap GUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5102A191406CC4B00FB2B68 /* Build configuration list for PBXNativeTarget "Tarsnap GUI" */;
+			buildPhases = (
+				F51029DF1406CC4B00FB2B68 /* Sources */,
+				F51029E01406CC4B00FB2B68 /* Frameworks */,
+				F51029E11406CC4B00FB2B68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tarsnap GUI";
+			productName = "Tarsnap GUI";
+			productReference = F51029E31406CC4B00FB2B68 /* Tarsnap GUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F5102A061406CC4B00FB2B68 /* Tarsnap GUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5102A1C1406CC4B00FB2B68 /* Build configuration list for PBXNativeTarget "Tarsnap GUITests" */;
+			buildPhases = (
+				F5102A021406CC4B00FB2B68 /* Sources */,
+				F5102A031406CC4B00FB2B68 /* Frameworks */,
+				F5102A041406CC4B00FB2B68 /* Resources */,
+				F5102A051406CC4B00FB2B68 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F5102A0C1406CC4B00FB2B68 /* PBXTargetDependency */,
+			);
+			name = "Tarsnap GUITests";
+			productName = "Tarsnap GUITests";
+			productReference = F5102A071406CC4B00FB2B68 /* Tarsnap GUITests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F51029DA1406CC4B00FB2B68 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = F51029DD1406CC4B00FB2B68 /* Build configuration list for PBXProject "Tarsnap GUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F51029D81406CC4B00FB2B68;
+			productRefGroup = F51029E41406CC4B00FB2B68 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F51029E21406CC4B00FB2B68 /* Tarsnap GUI */,
+				F5102A061406CC4B00FB2B68 /* Tarsnap GUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F51029E11406CC4B00FB2B68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F51029F21406CC4B00FB2B68 /* InfoPlist.strings in Resources */,
+				F51029F81406CC4B00FB2B68 /* Credits.rtf in Resources */,
+				F51029FE1406CC4B00FB2B68 /* TSGDocument.xib in Resources */,
+				F5102A011406CC4B00FB2B68 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5102A041406CC4B00FB2B68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5102A121406CC4B00FB2B68 /* InfoPlist.strings in Resources */,
+				F5102A141406CC4B00FB2B68 /* Tarsnap_GUITests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F5102A051406CC4B00FB2B68 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F51029DF1406CC4B00FB2B68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F51029F41406CC4B00FB2B68 /* main.m in Sources */,
+				F51029FB1406CC4B00FB2B68 /* TSGDocument.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5102A021406CC4B00FB2B68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5102A161406CC4B00FB2B68 /* Tarsnap_GUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F5102A0C1406CC4B00FB2B68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F51029E21406CC4B00FB2B68 /* Tarsnap GUI */;
+			targetProxy = F5102A0B1406CC4B00FB2B68 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F51029F01406CC4B00FB2B68 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F51029F11406CC4B00FB2B68 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F51029F61406CC4B00FB2B68 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F51029F71406CC4B00FB2B68 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F51029FC1406CC4B00FB2B68 /* TSGDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F51029FD1406CC4B00FB2B68 /* en */,
+			);
+			name = TSGDocument.xib;
+			sourceTree = "<group>";
+		};
+		F51029FF1406CC4B00FB2B68 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5102A001406CC4B00FB2B68 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		F5102A101406CC4B00FB2B68 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5102A111406CC4B00FB2B68 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F5102A171406CC4B00FB2B68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F5102A181406CC4B00FB2B68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F5102A1A1406CC4B00FB2B68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tarsnap GUI/Tarsnap GUI-Prefix.pch";
+				INFOPLIST_FILE = "Tarsnap GUI/Tarsnap GUI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F5102A1B1406CC4B00FB2B68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tarsnap GUI/Tarsnap GUI-Prefix.pch";
+				INFOPLIST_FILE = "Tarsnap GUI/Tarsnap GUI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F5102A1D1406CC4B00FB2B68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Tarsnap GUI.app/Contents/MacOS/Tarsnap GUI";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tarsnap GUI/Tarsnap GUI-Prefix.pch";
+				INFOPLIST_FILE = "Tarsnap GUITests/Tarsnap GUITests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		F5102A1E1406CC4B00FB2B68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Tarsnap GUI.app/Contents/MacOS/Tarsnap GUI";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tarsnap GUI/Tarsnap GUI-Prefix.pch";
+				INFOPLIST_FILE = "Tarsnap GUITests/Tarsnap GUITests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F51029DD1406CC4B00FB2B68 /* Build configuration list for PBXProject "Tarsnap GUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5102A171406CC4B00FB2B68 /* Debug */,
+				F5102A181406CC4B00FB2B68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5102A191406CC4B00FB2B68 /* Build configuration list for PBXNativeTarget "Tarsnap GUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5102A1A1406CC4B00FB2B68 /* Debug */,
+				F5102A1B1406CC4B00FB2B68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F5102A1C1406CC4B00FB2B68 /* Build configuration list for PBXNativeTarget "Tarsnap GUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5102A1D1406CC4B00FB2B68 /* Debug */,
+				F5102A1E1406CC4B00FB2B68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F51029DA1406CC4B00FB2B68 /* Project object */;
+}
