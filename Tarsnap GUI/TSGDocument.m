@@ -50,6 +50,7 @@
 - (void)loadBackupData;
 {
     self.loader = [[[TSGBackupListLoader alloc] initWithKeyURL:self.fileURL] autorelease];
+    
     [self.loader loadListWithCallback:^(TSGBackup *item) {
         [self.backupsController addObject:item]; 
     }];
@@ -85,5 +86,12 @@
     
     NSLog(@"Deleting backups: %@", selectedNames);
     // TODO: Actually implement deleting the backups
+}
+
+- (void)dealloc;
+{
+    [i_loader release];
+    
+    [super dealloc];
 }
 @end

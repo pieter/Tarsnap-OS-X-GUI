@@ -29,4 +29,12 @@
     return [[[self alloc] initWithName:theName date:theDate] autorelease];
 }
 
+- (void)dealloc
+{
+    [i_name release];
+    [i_dateCreated release];
+    
+    [super dealloc];
+}
+
 @end

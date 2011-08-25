@@ -68,5 +68,14 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 
         self.callback(backupItem);
     }
+    self.callback = nil;
+}
+
+- (void)dealloc;
+{
+    [i_keyURL release];
+    [i_callback release];
+    
+    [super dealloc];
 }
 @end
