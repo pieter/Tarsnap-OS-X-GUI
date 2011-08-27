@@ -18,4 +18,6 @@
 
 - (IBAction)deleteBackupsWithNames:(NSArray *)theBackupNames;
 
+- (void)passwordEntered:(NSString *)thePassword;
+
 @end

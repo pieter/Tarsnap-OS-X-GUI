@@ -36,13 +36,9 @@
 - (void)tarsnapDidFinish:(NSNotification *)theNotification;
 {
     NSData *data = [[theNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
+    NSString *text = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding]; // Using ISOLatin1 because it should always succeed.
 
-    NSString *text = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
-    if ([text hasPrefix:@"Please enter passphrase for keyfile"]) {
-        self.gotPasswordRequest = YES;
-    }
-    
-    [self.key command:self determinedPasswordRequired:self.gotPasswordRequest];
+    [self.key command:self determinedPasswordRequired:[text hasPrefix:@"Please enter passphrase for keyfile"]];
 }
 
 @end

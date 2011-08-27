@@ -10,6 +10,9 @@
 
 @implementation TSGRequestPasswordWindowController
 
+@synthesize passwordField = i_passwordField;
+@synthesize delegate = i_delegate;
+
 - (id)init
 {
     if (self = [super initWithWindowNibName:@"RequestPasswordSheet"]) {
@@ -30,8 +33,9 @@
 
 - (void)requestPasswordWindowDidClose:(NSWindow *)theSheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 {
-    NSLog(@"Finished the window!");
     [theSheet close];
+    
+    [self.delegate passwordRequestController:self FinishedWithPassword:[self.passwordField stringValue]];
 }
 
 - (IBAction)sendPassword:(id)sender {

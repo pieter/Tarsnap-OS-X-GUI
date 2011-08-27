@@ -13,7 +13,7 @@
 typedef void (^TSGBackupListLoaderCallback)(TSGBackup *backupItem);
 typedef void (^TSGBackupListLoaderFinishedCallback)();
 
-@interface TSGBackupListLoader : NSObject
+@interface TSGListArchivesCommand : NSObject
 
 - (id)initWithKeyURL:(NSURL *)theKeyURL;
 - (void)loadListWithItemCallback:(TSGBackupListLoaderCallback)theItemCallback finishedCallback:(TSGBackupListLoaderFinishedCallback)theFinishedCallback;

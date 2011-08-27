@@ -8,7 +8,22 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol TSGRequestPasswordWindowControllerDelegate;
+
 @interface TSGRequestPasswordWindowController : NSWindowController
+{
+}
+
+@property (assign) IBOutlet NSSecureTextField *passwordField;
+@property (assign) id<TSGRequestPasswordWindowControllerDelegate> delegate;
 
 - (void)showInWindow:(NSWindow *)theWindow;
+- (IBAction)sendPassword:(id)sender;
+
+@end
+
+@protocol TSGRequestPasswordWindowControllerDelegate <NSObject>
+
+- (void)passwordRequestController:(TSGRequestPasswordWindowController *)theController FinishedWithPassword:(NSString *)thePassword;
+
 @end

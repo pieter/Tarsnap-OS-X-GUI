@@ -8,14 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "TSGRequestPasswordWindowController.h"
+
 @class TSGDocument;
 
-@interface TSGDocumentWindowController : NSWindowController {
+@interface TSGDocumentWindowController : NSWindowController<TSGRequestPasswordWindowControllerDelegate> {
 }
 
 @property (assign) IBOutlet NSTextField *pathLabel;
 @property (assign) IBOutlet NSArrayController *backupsController;
 
 @property (readonly, assign) TSGDocument *document;
+
+- (void)requestPassword;
 
 @end

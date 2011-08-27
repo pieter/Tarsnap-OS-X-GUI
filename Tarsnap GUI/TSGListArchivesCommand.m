@@ -6,12 +6,12 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "TSGBackupListLoader.h"
+#import "TSGListArchivesCommand.h"
 
 // TODO: Automatically locate tarsnap, or ship it with the app
 static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 
-@interface TSGBackupListLoader ()
+@interface TSGListArchivesCommand ()
 
 @property (readonly, copy) NSURL *keyURL;
 @property (readwrite, copy) TSGBackupListLoaderCallback itemCallback;
@@ -20,7 +20,7 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 @property (retain) NSTask *task;
 @end
 
-@implementation TSGBackupListLoader
+@implementation TSGListArchivesCommand
 
 @synthesize keyURL = i_keyURL, itemCallback = i_callback, finishedCallback = i_finishedCallback, task = i_task;
 

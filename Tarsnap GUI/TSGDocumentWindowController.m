@@ -24,6 +24,7 @@
 {
     if (self = [super initWithWindowNibName:@"TSGDocument"]) {
         i_requestPasswordController = [[TSGRequestPasswordWindowController alloc] init];
+        [i_requestPasswordController setDelegate:self];
     }
     
     return self;
@@ -38,6 +39,11 @@
 {
     [self.pathLabel setStringValue:[[self document].fileURL path]];
     [self.backupsController bind:NSContentArrayBinding toObject:self.document withKeyPath:@"backups" options:0];
+}
+
+- (void)requestPassword;
+{
+    [i_requestPasswordController showInWindow:self.window];
 }
 
 - (TSGDocument *)document
@@ -77,6 +83,13 @@
         return;
     
     [self.document deleteBackupsWithNames:selectedNames];
+}
+
+#pragma mark SubWindowController delegate methods
+
+- (void)passwordRequestController:(TSGRequestPasswordWindowController *)theController FinishedWithPassword:(NSString *)thePassword;
+{
+    [self.document passwordEntered:thePassword];
 }
 
 @end

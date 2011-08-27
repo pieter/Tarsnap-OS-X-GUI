@@ -7,7 +7,14 @@
 //
 
 #import "TSGTarsnapKey.h"
+
 #import "TSGCheckPasswordRequiredCommand.h"
+#import "TSGVerifyPasswordCommand.h"
+
+@interface TSGTarsnapKey ()
+@property (readwrite, copy) NSString *password;
+@end
+
 @implementation TSGTarsnapKey
 
 @synthesize delegate = i_delegate, keyURL = i_keyURL, password = i_password;
@@ -32,17 +39,26 @@
 
 - (void)performPasswordRequiredCheck;
 {
-    TSGCheckPasswordRequiredCommand *command = [[TSGCheckPasswordRequiredCommand alloc] initWithTarsnapKey:self];
+    TSGCheckPasswordRequiredCommand *command = [[TSGCheckPasswordRequiredCommand alloc] initWithTarsnapKey:self]; // Leaking
     [command run];
 }
 
 - (void)testPassword:(NSString *)thePassword;
 {
+    NSLog(@"Going to test password: %@", thePassword);
+    self.password = thePassword;
     
+    TSGVerifyPasswordCommand *command = [[TSGVerifyPasswordCommand alloc] initWithTarsnapKey:self]; // Leaking
+    [command run];
 }
 
 - (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordRequired:(BOOL)thePasswordRequired;
 {
     [self.delegate tarsnapKey:self requiresPassword:thePasswordRequired];
+}
+
+- (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordValid:(BOOL)thePasswordValid;
+{
+    [self.delegate tarsnapKey:self acceptedPassword:thePasswordValid];
 }
 @end

@@ -8,7 +8,7 @@
 
 #import "TSGDocument.h"
 #import "TSGBackup.h"
-#import "TSGBackupListLoader.h"
+#import "TSGListArchivesCommand.h"
 #import "TSGRequestPasswordWindowController.h"
 #import "TSGDocumentWindowController.h"
 #import "TSGTarsnapKey.h"
@@ -18,7 +18,7 @@
 
 @property (readwrite, retain) NSArray *backups;
 @property (readwrite, retain) TSGTarsnapKey *key;
-@property (readwrite, retain) TSGBackupListLoader *loader;
+@property (readwrite, retain) TSGListArchivesCommand *loader;
 @property (readwrite, assign, getter=isLoading) BOOL loading;
 
 @property (retain) TSGDocumentWindowController *windowController;
@@ -63,7 +63,7 @@
 
 - (void)loadBackupData;
 {
-    self.loader = [[[TSGBackupListLoader alloc] initWithKeyURL:self.fileURL] autorelease];
+    self.loader = [[[TSGListArchivesCommand alloc] initWithKeyURL:self.fileURL] autorelease];
     self.backups = [NSArray array];
     [self.loader loadListWithItemCallback:^(TSGBackup *item) {
         self.backups = [self.backups arrayByAddingObject:item];
@@ -95,18 +95,23 @@
     if (!theRequiresPassword)
         [self loadBackupData];
     else {
-        NSWindow *showWindow = [[self.windowControllers objectAtIndex:0] window];
-        TSGRequestPasswordWindowController *wc = [[TSGRequestPasswordWindowController alloc] init]; // FIXME: leaking
-        [wc showInWindow:showWindow];
+        [[self windowController] requestPassword];
     }
+}
+
+- (void)passwordEntered:(NSString *)thePassword;
+{
+    [self.key testPassword:thePassword];
 }
 
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey acceptedPassword:(BOOL)theAcceptedPassword;
 {
     if (!theAcceptedPassword)
         NSLog(@"Password input failed");
-    else
+    else {
+        NSLog(@"Password entered successfully!");
         [self loadBackupData];
+    }
 }
 
 @end

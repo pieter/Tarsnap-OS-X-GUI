@@ -33,4 +33,5 @@
 
 @interface TSGTarsnapKey (InternalCallbacks)
 - (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordRequired:(BOOL)thePasswordRequired;
+- (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordValid:(BOOL)thePasswordValid;
 @end
