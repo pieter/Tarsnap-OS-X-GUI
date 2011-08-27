@@ -41,5 +41,8 @@
     
 }
 
-
+- (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordRequired:(BOOL)thePasswordRequired;
+{
+    [self.delegate tarsnapKey:self requiresPassword:thePasswordRequired];
+}
 @end

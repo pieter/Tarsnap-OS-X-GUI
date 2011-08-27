@@ -45,6 +45,7 @@
     }
     
     self.key = [[[TSGTarsnapKey alloc] initWithKeyURL:self.fileURL] autorelease];
+    self.key.delegate = self;
     
     return YES;
 }
@@ -104,5 +105,16 @@
     [i_loader release];
     
     [super dealloc];
+}
+
+#pragma Key delegate callbacks
+- (void)tarsnapKey:(TSGTarsnapKey *)theKey requiresPassword:(BOOL)theRequiresPassword;
+{
+    NSLog(@"Password required: %@", theRequiresPassword ? @"YES" : @"NO");
+}
+
+- (void)tarsnapKey:(TSGTarsnapKey *)theKey acceptedPassword:(BOOL)theAcceptedPassword;
+{
+    
 }
 @end

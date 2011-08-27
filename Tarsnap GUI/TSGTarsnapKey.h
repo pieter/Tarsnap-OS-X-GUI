@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @protocol TSGTarsnapKeyDelegate;
+@class TSGTarsnapCommand;
 
 @interface TSGTarsnapKey : NSObject
 
-@property (readonly, assign) id<TSGTarsnapKeyDelegate> delegate;
+@property (readwrite, assign) id<TSGTarsnapKeyDelegate> delegate;
 @property (readonly, copy) NSURL *keyURL;
 @property (readonly, copy) NSString *password;
 
@@ -28,4 +29,8 @@
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey requiresPassword:(BOOL)theRequiresPassword;
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey acceptedPassword:(BOOL)theAcceptedPassword;
 
+@end
+
+@interface TSGTarsnapKey (InternalCallbacks)
+- (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordRequired:(BOOL)thePasswordRequired;
 @end

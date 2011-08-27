@@ -42,7 +42,7 @@
         self.gotPasswordRequest = YES;
     }
     
-    NSLog(@"Key requires password: %@", self.gotPasswordRequest ? @"Yes" : @"No!");
+    [self.key command:self determinedPasswordRequired:self.gotPasswordRequest];
 }
 
 @end

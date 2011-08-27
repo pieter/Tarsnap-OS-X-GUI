@@ -7,10 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TSGTarsnapKey.h"
 
-@class TSGTarsnapKey;
-
-@interface TSGDocument : NSDocument {
+@interface TSGDocument : NSDocument<TSGTarsnapKeyDelegate> {
 }
 
 @property (readonly, retain) TSGTarsnapKey *key;
