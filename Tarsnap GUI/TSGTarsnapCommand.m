@@ -17,12 +17,12 @@ static NSString * const Tarsnap_Location = @"/usr/local/bin/";
 
 @implementation TSGTarsnapCommand
 
-@synthesize key = i_key;
+@synthesize key = i_key, task = i_task;
 
 - (id)initWithTarsnapKey:(TSGTarsnapKey *)theTarsnapKey;
 {
     
-    if ((self = self = [self init])) {
+    if ((self = [self init])) {
         i_key = [theTarsnapKey retain];
     }
     
@@ -31,7 +31,9 @@ static NSString * const Tarsnap_Location = @"/usr/local/bin/";
 
 - (void)dealloc;
 {
+    NSLog(@"Deallocing command: %@", self);
     [i_key release];
+    [i_task release];
     
     [super dealloc];
 }
@@ -44,6 +46,11 @@ static NSString * const Tarsnap_Location = @"/usr/local/bin/";
 + (NSURL *)tarsnapKeyManagementLocation;
 {
     return [[NSURL fileURLWithPath:Tarsnap_Location] URLByAppendingPathComponent:@"tarsnap-keymgmt"];
+}
+
+- (void)run;
+{
+    // Don't do anything yet, do something in the subclass
 }
 
 @end

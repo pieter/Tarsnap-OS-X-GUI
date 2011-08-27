@@ -68,7 +68,7 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 {
     NSData *data = [[theNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
     NSLog(@"Did send error! Data: %@, class: %@", data, [data class]);
-    NSString *errorString = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding]; // Chose latin1 because it supports all data
+    NSString *errorString = [[[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding] autorelease]; // Chose latin1 because it supports all data
     if (errorString && [errorString length] > 0) {
         NSLog(@"Received an error: %@", errorString);
         if ([errorString hasPrefix:@"Please enter passphrase for keyfile"]) {

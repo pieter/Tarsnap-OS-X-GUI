@@ -21,6 +21,7 @@
 		F5102A161406CC4B00FB2B68 /* Tarsnap_GUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5102A151406CC4B00FB2B68 /* Tarsnap_GUITests.m */; };
 		F536083214092DE100DCFEE2 /* TSGTarsnapKey.m in Sources */ = {isa = PBXBuildFile; fileRef = F536083114092DE100DCFEE2 /* TSGTarsnapKey.m */; };
 		F536083514092DEA00DCFEE2 /* TSGTarsnapCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = F536083414092DEA00DCFEE2 /* TSGTarsnapCommand.m */; };
+		F536083A1409317000DCFEE2 /* TSGCheckPasswordRequiredCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = F53608391409317000DCFEE2 /* TSGCheckPasswordRequiredCommand.m */; };
 		F5F8C5141406D21B00FE5539 /* TSGBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8C5131406D21B00FE5539 /* TSGBackup.m */; };
 		F5F8C5181406D46300FE5539 /* TSGBackupListLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8C5171406D46300FE5539 /* TSGBackupListLoader.m */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,8 @@
 		F536083114092DE100DCFEE2 /* TSGTarsnapKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGTarsnapKey.m; sourceTree = "<group>"; };
 		F536083314092DEA00DCFEE2 /* TSGTarsnapCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGTarsnapCommand.h; sourceTree = "<group>"; };
 		F536083414092DEA00DCFEE2 /* TSGTarsnapCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGTarsnapCommand.m; sourceTree = "<group>"; };
+		F53608381409317000DCFEE2 /* TSGCheckPasswordRequiredCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGCheckPasswordRequiredCommand.h; sourceTree = "<group>"; };
+		F53608391409317000DCFEE2 /* TSGCheckPasswordRequiredCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGCheckPasswordRequiredCommand.m; sourceTree = "<group>"; };
 		F5F8C5121406D21B00FE5539 /* TSGBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGBackup.h; sourceTree = "<group>"; };
 		F5F8C5131406D21B00FE5539 /* TSGBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGBackup.m; sourceTree = "<group>"; };
 		F5F8C5161406D46300FE5539 /* TSGBackupListLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGBackupListLoader.h; sourceTree = "<group>"; };
@@ -171,14 +174,11 @@
 		F536082E14092DCC00DCFEE2 /* Tarsnap Interface */ = {
 			isa = PBXGroup;
 			children = (
+				F53608371409315600DCFEE2 /* Commands */,
 				F5F8C5121406D21B00FE5539 /* TSGBackup.h */,
 				F5F8C5131406D21B00FE5539 /* TSGBackup.m */,
 				F536083014092DE100DCFEE2 /* TSGTarsnapKey.h */,
 				F536083114092DE100DCFEE2 /* TSGTarsnapKey.m */,
-				F536083314092DEA00DCFEE2 /* TSGTarsnapCommand.h */,
-				F536083414092DEA00DCFEE2 /* TSGTarsnapCommand.m */,
-				F5F8C5161406D46300FE5539 /* TSGBackupListLoader.h */,
-				F5F8C5171406D46300FE5539 /* TSGBackupListLoader.m */,
 			);
 			name = "Tarsnap Interface";
 			sourceTree = "<group>";
@@ -191,6 +191,19 @@
 				F51029FC1406CC4B00FB2B68 /* TSGDocument.xib */,
 			);
 			name = "Interface Stuff";
+			sourceTree = "<group>";
+		};
+		F53608371409315600DCFEE2 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				F536083314092DEA00DCFEE2 /* TSGTarsnapCommand.h */,
+				F536083414092DEA00DCFEE2 /* TSGTarsnapCommand.m */,
+				F5F8C5161406D46300FE5539 /* TSGBackupListLoader.h */,
+				F5F8C5171406D46300FE5539 /* TSGBackupListLoader.m */,
+				F53608381409317000DCFEE2 /* TSGCheckPasswordRequiredCommand.h */,
+				F53608391409317000DCFEE2 /* TSGCheckPasswordRequiredCommand.m */,
+			);
+			name = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +318,7 @@
 				F5F8C5181406D46300FE5539 /* TSGBackupListLoader.m in Sources */,
 				F536083214092DE100DCFEE2 /* TSGTarsnapKey.m in Sources */,
 				F536083514092DEA00DCFEE2 /* TSGTarsnapCommand.m in Sources */,
+				F536083A1409317000DCFEE2 /* TSGCheckPasswordRequiredCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

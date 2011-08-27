@@ -8,9 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class TSGTarsnapKey;
+
 @interface TSGDocument : NSDocument {
 }
 
+@property (readonly, retain) TSGTarsnapKey *key;
 @property (retain) IBOutlet NSArrayController *backupsController;
 @property (readonly, assign, getter=isLoading) BOOL loading;
 

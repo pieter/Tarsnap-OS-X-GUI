@@ -7,7 +7,7 @@
 //
 
 #import "TSGTarsnapKey.h"
-
+#import "TSGCheckPasswordRequiredCommand.h"
 @implementation TSGTarsnapKey
 
 @synthesize delegate = i_delegate, keyURL = i_keyURL, password = i_password;
@@ -32,7 +32,8 @@
 
 - (void)performPasswordRequiredCheck;
 {
-    
+    TSGCheckPasswordRequiredCommand *command = [[TSGCheckPasswordRequiredCommand alloc] initWithTarsnapKey:self];
+    [command run];
 }
 
 - (void)testPassword:(NSString *)thePassword;

@@ -13,10 +13,12 @@
 @interface TSGTarsnapCommand : NSObject
 
 @property (readonly, retain) TSGTarsnapKey *key;
+@property (retain) NSTask *task;
 
 - (id)initWithTarsnapKey:(TSGTarsnapKey *)theTarsnapKey;
 
 + (NSURL *)tarsnapLocation;
 + (NSURL *)tarsnapKeyManagementLocation;
 
+- (void)run;
 @end

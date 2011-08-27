@@ -9,16 +9,21 @@
 #import "TSGDocument.h"
 #import "TSGBackup.h"
 #import "TSGBackupListLoader.h"
+#import "TSGTarsnapKey.h"
 
 @interface TSGDocument ()
 - (void)loadBackupData;
+
+@property (readwrite, retain) TSGTarsnapKey *key;
 @property (readwrite, retain) TSGBackupListLoader *loader;
 @property (readwrite, assign, getter=isLoading) BOOL loading;
+
+
 @end
 
 @implementation TSGDocument
 
-@synthesize backupsController = i_backupsController, loader = i_loader, loading = i_loading;
+@synthesize backupsController = i_backupsController, loader = i_loader, loading = i_loading, key = i_key;
 
 - (NSString *)windowNibName
 {
@@ -28,7 +33,8 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
-    [self loadBackupData];
+    [self.key performPasswordRequiredCheck];
+//    [self loadBackupData];
 }
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
@@ -38,7 +44,7 @@
         return NO;
     }
     
-    // We don't actually do anything here, we just need the fileURL property for later.
+    self.key = [[[TSGTarsnapKey alloc] initWithKeyURL:self.fileURL] autorelease];
     
     return YES;
 }
