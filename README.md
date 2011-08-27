@@ -1,9 +1,12 @@
 Tarsnap GUI
 ===========
 
-This is a small GUI for OS X for Tarsnap. The idea for now is that you can
-list the archives you have and optionally delete them. It's built with Xcode
-4.1.
+This is a small GUI for OS X for Tarsnap. The idea is that you can list the
+archives you have and optionally delete them. It's built with Xcode 4.1.
+
+For now it's possible to list archives in both passphrased and
+non-passphrased keys. Deletion is not yet possible, as it requires a volid
+cachedir, and I'm not sure yet how to add that properly.
 
 How to build
 ------------
