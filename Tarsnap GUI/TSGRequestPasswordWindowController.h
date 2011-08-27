@@ -18,7 +18,9 @@
 @property (assign) id<TSGRequestPasswordWindowControllerDelegate> delegate;
 
 - (void)showInWindow:(NSWindow *)theWindow;
+
 - (IBAction)sendPassword:(id)sender;
+- (IBAction)cancelPasswordRequest:(id)sender;
 
 @end
 

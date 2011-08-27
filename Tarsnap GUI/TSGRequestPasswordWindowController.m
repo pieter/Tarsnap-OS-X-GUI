@@ -35,11 +35,18 @@
 {
     [theSheet close];
     
-    [self.delegate passwordRequestController:self FinishedWithPassword:[self.passwordField stringValue]];
+    if (returnCode == NSAlertDefaultReturn)
+        [self.delegate passwordRequestController:self FinishedWithPassword:[self.passwordField stringValue]];
 }
 
-- (IBAction)sendPassword:(id)sender {
-    [NSApp endSheet:self.window];
+- (IBAction)sendPassword:(id)sender;
+{
+    [NSApp endSheet:self.window returnCode:NSAlertDefaultReturn];
+}
+
+- (IBAction)cancelPasswordRequest:(id)sender;
+{
+    [NSApp endSheet:self.window returnCode:NSAlertAlternateReturn];
 }
 
 
