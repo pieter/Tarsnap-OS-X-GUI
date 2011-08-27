@@ -16,6 +16,6 @@
 @property (assign) IBOutlet NSTextField *pathLabel;
 @property (assign) IBOutlet NSArrayController *backupsController;
 
-- (TSGDocument *)document;
+@property (readonly, assign) TSGDocument *document;
 
 @end

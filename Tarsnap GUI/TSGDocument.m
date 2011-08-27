@@ -78,30 +78,8 @@
 {
     if ([theBackupNames count] == 0)
         return;
-
-//    NSString *warning = nil;
-//    if ([theBackupNames count] == 1)
-//        warning = [NSString stringWithFormat:@"Are you sure you want to delete '%@'?", [selectedNames objectAtIndex:0]];
-//    else
-//        warning = [NSString stringWithFormat:@"Are you sure you want to delete %lu backups?", [selectedNames count]];
-//
-//    NSAlert *alert = [NSAlert alertWithMessageText:warning defaultButton:@"Delete" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"This action is irreversible"];
-//    alert.alertStyle = NSCriticalAlertStyle;
-//    CFRetain(selectedNames);
-//    [alert beginSheetModalForWindow:[[[self windowControllers] objectAtIndex:0] window] modalDelegate:self didEndSelector:@selector(backupDeleteAlertDidEnd:returnCode:contextInfo:) contextInfo:(void *)selectedNames];
-}
-
-- (void)backupDeleteAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-{
-    NSArray *selectedNames = (NSArray *)contextInfo;
-    [[selectedNames retain] autorelease];
-    CFRelease(selectedNames);
     
-    if (returnCode == NSAlertAlternateReturn)
-        return;
-    
-    NSLog(@"Deleting backups: %@", selectedNames);
-    // TODO: Actually implement deleting the backups
+    NSLog(@"Would delete backups with names: %@", theBackupNames);
 }
 
 - (void)dealloc;
@@ -110,7 +88,6 @@
     
     [super dealloc];
 }
-
 
 #pragma Key delegate callbacks
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey requiresPassword:(BOOL)theRequiresPassword;
@@ -126,6 +103,10 @@
 
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey acceptedPassword:(BOOL)theAcceptedPassword;
 {
-    
+    if (!theAcceptedPassword)
+        NSLog(@"Password input failed");
+    else
+        [self loadBackupData];
 }
+
 @end

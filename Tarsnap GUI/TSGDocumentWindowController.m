@@ -47,6 +47,36 @@
 
 - (IBAction)deleteSelectedBackups:(id)theSender;
 {
-    NSLog(@"Auch!");
+    NSArray *backupNames = [[self.backupsController selectedObjects] valueForKey:@"name"];
+    if ([backupNames count] == 0)
+        return;
+
+    NSString *warning = nil;
+    if ([backupNames count] == 1)
+        warning = [NSString stringWithFormat:@"Are you sure you want to delete '%@'?", [backupNames objectAtIndex:0]];
+    else
+        warning = [NSString stringWithFormat:@"Are you sure you want to delete %lu backups?", [backupNames count]];
+
+    NSAlert *alert = [NSAlert alertWithMessageText:warning defaultButton:@"Delete" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"This action is irreversible"];
+    alert.alertStyle = NSCriticalAlertStyle;
+    CFRetain(backupNames);
+
+    [alert beginSheetModalForWindow:self.window
+                      modalDelegate:self
+                     didEndSelector:@selector(backupDeleteAlertDidEnd:returnCode:contextInfo:)
+                        contextInfo:(void *)backupNames];
 }
+
+- (void)backupDeleteAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+{
+    NSArray *selectedNames = (NSArray *)contextInfo;
+    [[selectedNames retain] autorelease];
+    CFRelease(selectedNames);
+    
+    if (returnCode == NSAlertAlternateReturn)
+        return;
+    
+    [self.document deleteBackupsWithNames:selectedNames];
+}
+
 @end
