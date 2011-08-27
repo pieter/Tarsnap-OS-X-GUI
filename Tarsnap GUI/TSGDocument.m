@@ -109,4 +109,14 @@
     }
 }
 
+- (void)tarsnapKey:(TSGTarsnapKey *)theKey foundArchive:(TSGBackup *)theArchive;
+{
+    self.backups = [self.backups arrayByAddingObject:theArchive];
+}
+
+- (void)tarsnapKeyFinishedListingArchives:(TSGTarsnapKey *)theKey;
+{
+    self.loading = NO;
+}
+
 @end

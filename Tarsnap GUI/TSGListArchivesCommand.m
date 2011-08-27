@@ -49,11 +49,6 @@
     NSString *errorString = [[[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding] autorelease]; // Chose latin1 because it supports all data
     if (errorString && [errorString length] > 0) {
         NSLog(@"Received an error: %@", errorString);
-        if ([errorString hasPrefix:@"Please enter passphrase for keyfile"]) {
-            NSLog(@"The warning asks for a password! Handle: %@", self.task.standardInput);
-//            [[(NSPipe *)self.task.standardInput fileHandleForWriting] writeData:outData];
-            
-        }
     }
 
 }
@@ -61,7 +56,7 @@
 - (void)tarsnapDidFinish:(NSNotification *)theNotification;
 {
     NSData *theData = [[theNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
-    NSString *dataAsString = [[[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding] autorelease];
+    NSString *dataAsString = [[[NSString alloc] initWithData:theData encoding:NSISOLatin1StringEncoding] autorelease];
     // FIXME: handle potential errors here, such as not conforming to NSUTF8StringEncoding
     
     NSArray *items = [dataAsString componentsSeparatedByString:@"\n"];
@@ -75,9 +70,9 @@
         NSString *dateStr = [components objectAtIndex:1];
         NSDate *date = [NSDate dateWithNaturalLanguageString:dateStr];
         TSGBackup *backupItem = [TSGBackup backupWithName:name date:date];
-
-        NSLog(@"Found archive: %@", backupItem);
+        [self.key command:self foundArchive:backupItem];
     }
+    [self.key commandFinishedListingArchives:self];
 }
 
 @end

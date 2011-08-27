@@ -10,6 +10,7 @@
 
 @protocol TSGTarsnapKeyDelegate;
 @class TSGTarsnapCommand;
+@class TSGBackup;
 
 @interface TSGTarsnapKey : NSObject
 
@@ -29,9 +30,14 @@
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey requiresPassword:(BOOL)theRequiresPassword;
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey acceptedPassword:(BOOL)theAcceptedPassword;
 
+- (void)tarsnapKey:(TSGTarsnapKey *)theKey foundArchive:(TSGBackup *)theArchive;
+- (void)tarsnapKeyFinishedListingArchives:(TSGTarsnapKey *)theKey;
 @end
 
 @interface TSGTarsnapKey (InternalCallbacks)
 - (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordRequired:(BOOL)thePasswordRequired;
 - (void)command:(TSGTarsnapCommand *)theCommand determinedPasswordValid:(BOOL)thePasswordValid;
+
+- (void)command:(TSGTarsnapCommand *)theCommand foundArchive:(TSGBackup *)theArchive;
+- (void)commandFinishedListingArchives:(TSGTarsnapCommand *)theCommand;
 @end

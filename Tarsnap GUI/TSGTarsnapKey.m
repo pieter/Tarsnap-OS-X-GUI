@@ -61,4 +61,14 @@
 {
     [self.delegate tarsnapKey:self acceptedPassword:thePasswordValid];
 }
+
+- (void)command:(TSGTarsnapCommand *)theCommand foundArchive:(TSGBackup *)theArchive;
+{
+    [self.delegate tarsnapKey:self foundArchive:theArchive];
+}
+- (void)commandFinishedListingArchives:(TSGTarsnapCommand *)theCommand;
+{
+    [self.delegate tarsnapKeyFinishedListingArchives:self];
+}
+
 @end

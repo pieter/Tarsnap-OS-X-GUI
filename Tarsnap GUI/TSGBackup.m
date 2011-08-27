@@ -37,4 +37,9 @@
     [super dealloc];
 }
 
+- (NSString *)description;
+{
+    return [NSString stringWithFormat:@"<%@: %p, name: %@, dateCreated: %@>", [self class], self, self.name, self.dateCreated];
+}
+
 @end
