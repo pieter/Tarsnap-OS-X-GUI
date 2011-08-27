@@ -8,39 +8,16 @@
 
 #import "TSGListArchivesCommand.h"
 
-// TODO: Automatically locate tarsnap, or ship it with the app
-static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
-
-@interface TSGListArchivesCommand ()
-
-@property (readonly, copy) NSURL *keyURL;
-@property (readwrite, copy) TSGBackupListLoaderCallback itemCallback;
-@property (readwrite, copy) TSGBackupListLoaderFinishedCallback finishedCallback;
-
-@property (retain) NSTask *task;
-@end
+#import "TSGTarsnapKey.h"
+#import "TSGBackup.h"
 
 @implementation TSGListArchivesCommand
 
-@synthesize keyURL = i_keyURL, itemCallback = i_callback, finishedCallback = i_finishedCallback, task = i_task;
-
-- (id)initWithKeyURL:(NSURL *)theKeyURL;
+- (void)run;
 {
-    if ((self = [self init])) {
-        i_keyURL = [theKeyURL copy];
-    }
-    
-    return self;
-}
-
-- (void)loadListWithItemCallback:(TSGBackupListLoaderCallback)theItemCallback finishedCallback:(TSGBackupListLoaderFinishedCallback)theFinishedCallback;
-{
-
-    self.itemCallback = theItemCallback;
-    self.finishedCallback = theFinishedCallback;
     self.task = [[[NSTask alloc] init] autorelease];
-    self.task.launchPath = TARSNAP_LOCATION;
-    self.task.arguments = [NSArray arrayWithObjects:@"-v", @"--list-archives", @"--keyfile", [self.keyURL path], nil];
+    [self.task setLaunchPath:[[[self class] tarsnapLocation] path]];
+    self.task.arguments = [NSArray arrayWithObjects:@"-v", @"--list-archives", @"--keyfile", [self.key.keyURL path], nil];
 
     NSPipe *outPipe = [NSPipe pipe];
     NSFileHandle *readHandle = [outPipe fileHandleForReading];
@@ -55,10 +32,11 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tarsnapDidSendError:) name:NSFileHandleReadCompletionNotification object:errorHandle];
     [errorHandle readInBackgroundAndNotify];
 
-    self.task.standardInput = [NSPipe pipe];
-    NSData *outData = [@"hoihoi" dataUsingEncoding:NSISOLatin1StringEncoding];
-    [[self.task.standardInput fileHandleForWriting] writeData:outData];
-    [[self.task.standardInput fileHandleForWriting] closeFile];
+    if (self.key.password) {
+        self.task.standardInput = [NSPipe pipe];
+        [[self.task.standardInput fileHandleForWriting] writeData:[self.key.password dataUsingEncoding:NSUTF8StringEncoding]];
+        [[self.task.standardInput fileHandleForWriting] closeFile];
+    }
 
     NSLog(@"Launching task!");
     [self.task launch];
@@ -98,20 +76,8 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
         NSDate *date = [NSDate dateWithNaturalLanguageString:dateStr];
         TSGBackup *backupItem = [TSGBackup backupWithName:name date:date];
 
-        self.itemCallback(backupItem);
+        NSLog(@"Found archive: %@", backupItem);
     }
-    [[self retain] autorelease];
-    self.finishedCallback();
-    self.itemCallback = nil;
-    self.finishedCallback = nil;
 }
 
-- (void)dealloc;
-{
-    [i_keyURL release];
-    [i_callback release];
-    [i_finishedCallback release];
-    
-    [super dealloc];
-}
 @end

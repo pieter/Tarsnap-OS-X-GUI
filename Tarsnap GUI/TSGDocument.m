@@ -63,14 +63,9 @@
 
 - (void)loadBackupData;
 {
-    self.loader = [[[TSGListArchivesCommand alloc] initWithKeyURL:self.fileURL] autorelease];
+    self.loader = [[TSGListArchivesCommand alloc] initWithTarsnapKey:self.key];
     self.backups = [NSArray array];
-    [self.loader loadListWithItemCallback:^(TSGBackup *item) {
-        self.backups = [self.backups arrayByAddingObject:item];
-    } finishedCallback:^() {
-        self.loader = nil;
-        self.loading = NO;
-    }];
+    [self.loader run];
     self.loading = YES;
 }
 

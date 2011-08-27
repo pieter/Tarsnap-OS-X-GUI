@@ -8,14 +8,12 @@
 // Communicates with tarsnap via pipes to read in the list of archives (tarsnap --list-archives)
 
 #import <Foundation/Foundation.h>
-#import "TSGBackup.h"
 
-typedef void (^TSGBackupListLoaderCallback)(TSGBackup *backupItem);
-typedef void (^TSGBackupListLoaderFinishedCallback)();
+#import "TSGTarsnapCommand.h"
 
-@interface TSGListArchivesCommand : NSObject
+@class TSGBackup;
+@class TSGTarsnapKey;
 
-- (id)initWithKeyURL:(NSURL *)theKeyURL;
-- (void)loadListWithItemCallback:(TSGBackupListLoaderCallback)theItemCallback finishedCallback:(TSGBackupListLoaderFinishedCallback)theFinishedCallback;
+@interface TSGListArchivesCommand : TSGTarsnapCommand
 
 @end
