@@ -16,11 +16,13 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 @property (readonly, copy) NSURL *keyURL;
 @property (readwrite, copy) TSGBackupListLoaderCallback itemCallback;
 @property (readwrite, copy) TSGBackupListLoaderFinishedCallback finishedCallback;
+
+@property (retain) NSTask *task;
 @end
 
 @implementation TSGBackupListLoader
 
-@synthesize keyURL = i_keyURL, itemCallback = i_callback, finishedCallback = i_finishedCallback;
+@synthesize keyURL = i_keyURL, itemCallback = i_callback, finishedCallback = i_finishedCallback, task = i_task;
 
 - (id)initWithKeyURL:(NSURL *)theKeyURL;
 {
@@ -33,21 +35,49 @@ static NSString * const TARSNAP_LOCATION = @"/usr/local/bin/tarsnap";
 
 - (void)loadListWithItemCallback:(TSGBackupListLoaderCallback)theItemCallback finishedCallback:(TSGBackupListLoaderFinishedCallback)theFinishedCallback;
 {
+
     self.itemCallback = theItemCallback;
     self.finishedCallback = theFinishedCallback;
-    NSTask *task = [[[NSTask alloc] init] autorelease];
-    task.launchPath = TARSNAP_LOCATION;
-    task.arguments = [NSArray arrayWithObjects:@"-v", @"--list-archives", @"--keyfile", [self.keyURL path], nil];
-    
-    NSPipe *pipe = [NSPipe pipe];
-    NSFileHandle *readHandle = [pipe fileHandleForReading];
-    task.standardOutput = pipe;
-    
+    self.task = [[[NSTask alloc] init] autorelease];
+    self.task.launchPath = TARSNAP_LOCATION;
+    self.task.arguments = [NSArray arrayWithObjects:@"-v", @"--list-archives", @"--keyfile", [self.keyURL path], nil];
+
+    NSPipe *outPipe = [NSPipe pipe];
+    NSFileHandle *readHandle = [outPipe fileHandleForReading];
+    self.task.standardOutput = outPipe;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tarsnapDidFinish:) name:NSFileHandleReadToEndOfFileCompletionNotification object:readHandle];
-    
     // TODO: Handle incremental loading of backup names
     [readHandle readToEndOfFileInBackgroundAndNotify];
-    [task launch];
+    
+    NSPipe *errorPipe = [NSPipe pipe];
+    NSFileHandle *errorHandle = [errorPipe fileHandleForReading];
+    self.task.standardError = errorPipe;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tarsnapDidSendError:) name:NSFileHandleReadCompletionNotification object:errorHandle];
+    [errorHandle readInBackgroundAndNotify];
+
+    self.task.standardInput = [NSPipe pipe];
+    NSData *outData = [@"hoihoi" dataUsingEncoding:NSISOLatin1StringEncoding];
+    [[self.task.standardInput fileHandleForWriting] writeData:outData];
+    [[self.task.standardInput fileHandleForWriting] closeFile];
+
+    NSLog(@"Launching task!");
+    [self.task launch];
+}
+
+- (void)tarsnapDidSendError:(NSNotification *)theNotification;
+{
+    NSData *data = [[theNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
+    NSLog(@"Did send error! Data: %@, class: %@", data, [data class]);
+    NSString *errorString = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding]; // Chose latin1 because it supports all data
+    if (errorString && [errorString length] > 0) {
+        NSLog(@"Received an error: %@", errorString);
+        if ([errorString hasPrefix:@"Please enter passphrase for keyfile"]) {
+            NSLog(@"The warning asks for a password! Handle: %@", self.task.standardInput);
+//            [[(NSPipe *)self.task.standardInput fileHandleForWriting] writeData:outData];
+            
+        }
+    }
+
 }
 
 - (void)tarsnapDidFinish:(NSNotification *)theNotification;
