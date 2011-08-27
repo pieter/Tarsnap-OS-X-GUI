@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class TSGTarsnapKey;
+
 @interface TSGTarsnapCommand : NSObject
+
+@property (readonly, retain) TSGTarsnapKey *key;
+
+- (id)initWithTarsnapKey:(TSGTarsnapKey *)theTarsnapKey;
+
++ (NSURL *)tarsnapLocation;
++ (NSURL *)tarsnapKeyManagementLocation;
 
 @end

@@ -10,14 +10,35 @@
 
 @implementation TSGTarsnapKey
 
-- (id)init
+@synthesize delegate = i_delegate, keyURL = i_keyURL, password = i_password;
+
+- (id)initWithKeyURL:(NSURL *)theKeyURL;
 {
-    self = [super init];
-    if (self) {
-        // Initialization code here.
+    if ((self = [self init])) {
+        i_keyURL = [theKeyURL copy];
     }
     
     return self;
 }
+
+- (void)dealloc;
+{
+    i_delegate = nil;
+    [i_keyURL release];
+    [i_password release];
+    
+    [super dealloc];
+}
+
+- (void)performPasswordRequiredCheck;
+{
+    
+}
+
+- (void)testPassword:(NSString *)thePassword;
+{
+    
+}
+
 
 @end

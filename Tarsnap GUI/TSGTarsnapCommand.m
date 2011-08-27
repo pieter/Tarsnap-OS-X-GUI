@@ -7,17 +7,43 @@
 //
 
 #import "TSGTarsnapCommand.h"
+#import "TSGTarsnapKey.h"
+
+static NSString * const Tarsnap_Location = @"/usr/local/bin/";
+
+@interface TSGTarsnapCommand ()
+@property (readwrite, retain) TSGTarsnapKey *key;
+@end
 
 @implementation TSGTarsnapCommand
 
-- (id)init
+@synthesize key = i_key;
+
+- (id)initWithTarsnapKey:(TSGTarsnapKey *)theTarsnapKey;
 {
-    self = [super init];
-    if (self) {
-        // Initialization code here.
+    
+    if ((self = self = [self init])) {
+        i_key = [theTarsnapKey retain];
     }
     
     return self;
+}
+
+- (void)dealloc;
+{
+    [i_key release];
+    
+    [super dealloc];
+}
+
++ (NSURL *)tarsnapLocation;
+{
+    return [[NSURL fileURLWithPath:Tarsnap_Location] URLByAppendingPathComponent:@"tarsnap"];
+}
+
++ (NSURL *)tarsnapKeyManagementLocation;
+{
+    return [[NSURL fileURLWithPath:Tarsnap_Location] URLByAppendingPathComponent:@"tarsnap-keymgmt"];
 }
 
 @end
