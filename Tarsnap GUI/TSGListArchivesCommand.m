@@ -11,10 +11,20 @@
 #import "TSGTarsnapKey.h"
 #import "TSGBackup.h"
 
+#import "TSGStreamingArray.h"
+
+@interface TSGListArchivesCommand ()
+@property (retain) TSGStreamingArray *output;
+@end
+
 @implementation TSGListArchivesCommand
+
+@synthesize output = i_output;
 
 - (void)run;
 {
+    self.output = [[[TSGStreamingArray alloc] initWithSeparator:'\n'] autorelease];
+
     self.task = [[[NSTask alloc] init] autorelease];
     [self.task setLaunchPath:[[[self class] tarsnapLocation] path]];
     self.task.arguments = [NSArray arrayWithObjects:@"-v", @"--list-archives", @"--keyfile", [self.key.keyURL path], nil];
@@ -22,9 +32,8 @@
     NSPipe *outPipe = [NSPipe pipe];
     NSFileHandle *readHandle = [outPipe fileHandleForReading];
     self.task.standardOutput = outPipe;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tarsnapDidFinish:) name:NSFileHandleReadToEndOfFileCompletionNotification object:readHandle];
-    // TODO: Handle incremental loading of backup names
-    [readHandle readToEndOfFileInBackgroundAndNotify];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tarsnapDidSendOutput:) name:NSFileHandleReadCompletionNotification object:readHandle];
+    [readHandle readInBackgroundAndNotify];
     
     NSPipe *errorPipe = [NSPipe pipe];
     NSFileHandle *errorHandle = [errorPipe fileHandleForReading];
@@ -39,6 +48,8 @@
     }
 
     NSLog(@"Launching task!");
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskFinished:) name:NSTaskDidTerminateNotification object:self.task];
     [self.task launch];
 }
 
@@ -53,25 +64,30 @@
 
 }
 
-- (void)tarsnapDidFinish:(NSNotification *)theNotification;
+- (void)tarsnapDidSendOutput:(NSNotification *)theNotification;
 {
-    NSData *theData = [[theNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
-    NSString *dataAsString = [[[NSString alloc] initWithData:theData encoding:NSISOLatin1StringEncoding] autorelease];
-    // FIXME: handle potential errors here, such as not conforming to NSUTF8StringEncoding
-    
-    NSArray *items = [dataAsString componentsSeparatedByString:@"\n"];
-    for (NSString *item in items) {
+    NSData *newData = [[theNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
+    [self.output readData:newData];
+
+    NSArray *newItems = [self.output nextItems];
+    for (NSData *item in newItems) {
+        NSString *outputString = [[[NSString alloc] initWithData:item encoding:NSISOLatin1StringEncoding] autorelease];
         // Skip small items, such as empty newlines.
-        if ([item length] < 2)
+        if ([outputString length] < 2)
             continue;
 
-        NSArray *components = [item componentsSeparatedByString:@"\t"];
+        NSArray *components = [outputString componentsSeparatedByString:@"\t"];
         NSString *name = [components objectAtIndex:0];
         NSString *dateStr = [components objectAtIndex:1];
         NSDate *date = [NSDate dateWithNaturalLanguageString:dateStr];
         TSGBackup *backupItem = [TSGBackup backupWithName:name date:date];
         [self.key command:self foundArchive:backupItem];
     }
+    [[theNotification object] readInBackgroundAndNotify];
+}
+
+- (void)taskFinished:(NSNotification *)theNotification;
+{
     [self.key commandFinishedListingArchives:self];
 }
 

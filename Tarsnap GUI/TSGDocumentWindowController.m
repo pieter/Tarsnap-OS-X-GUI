@@ -37,7 +37,8 @@
 
 - (void)awakeFromNib
 {
-    [self.pathLabel setStringValue:[[self document].fileURL path]];
+    if ([[self document].fileURL path])
+        [self.pathLabel setStringValue:[[self document].fileURL path]];
     [self.backupsController bind:NSContentArrayBinding toObject:self.document withKeyPath:@"backups" options:0];
 }
 

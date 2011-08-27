@@ -116,7 +116,7 @@
 										<object class="NSTableView" id="909364809">
 											<reference key="NSNextResponder" ref="232945551"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrameSize">{513, 323}</string>
+											<string key="NSFrameSize">{505, 323}</string>
 											<reference key="NSSuperview" ref="232945551"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="98805871"/>
@@ -125,7 +125,7 @@
 											<object class="NSTableHeaderView" key="NSHeaderView" id="355146193">
 												<reference key="NSNextResponder" ref="1071104339"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrameSize">{513, 17}</string>
+												<string key="NSFrameSize">{505, 17}</string>
 												<reference key="NSSuperview" ref="1071104339"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="344350550"/>
@@ -187,7 +187,7 @@
 													<reference key="NSTableView" ref="909364809"/>
 												</object>
 												<object class="NSTableColumn" id="201428680">
-													<double key="NSWidth">165</double>
+													<double key="NSWidth">157</double>
 													<double key="NSMinWidth">40</double>
 													<double key="NSMaxWidth">1000</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -261,7 +261,7 @@
 											<int key="NSTableViewGroupRowStyle">1</int>
 										</object>
 									</object>
-									<string key="NSFrame">{{1, 17}, {513, 323}}</string>
+									<string key="NSFrame">{{1, 17}, {505, 323}}</string>
 									<reference key="NSSuperview" ref="905430457"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="909364809"/>
@@ -303,7 +303,7 @@
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<reference ref="355146193"/>
 									</object>
-									<string key="NSFrame">{{1, 0}, {513, 17}}</string>
+									<string key="NSFrame">{{1, 0}, {505, 17}}</string>
 									<reference key="NSSuperview" ref="905430457"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="355146193"/>
@@ -314,7 +314,7 @@
 								</object>
 								<reference ref="344350550"/>
 							</object>
-							<string key="NSFrame">{{-1, 42}, {515, 341}}</string>
+							<string key="NSFrame">{{0, 42}, {507, 341}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1071104339"/>
@@ -353,7 +353,7 @@
 						</object>
 						<object class="NSProgressIndicator" id="531551603">
 							<reference key="NSNextResponder" ref="568628114"/>
-							<int key="NSvFlags">1292</int>
+							<int key="NSvFlags">1316</int>
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
 							<string key="NSFrame">{{7, 13}, {16, 16}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
@@ -365,7 +365,7 @@
 						</object>
 						<object class="NSTextField" id="337702803">
 							<reference key="NSNextResponder" ref="568628114"/>
-							<int key="NSvFlags">268</int>
+							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{28, 13}, {124, 17}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
@@ -407,7 +407,7 @@
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
-			<object class="NSUserDefaultsController" id="718338531">
+			<object class="NSUserDefaultsController" id="415356885">
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 		</object>
@@ -721,7 +721,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100130</int>
-						<reference key="object" ref="718338531"/>
+						<reference key="object" ref="415356885"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</object>

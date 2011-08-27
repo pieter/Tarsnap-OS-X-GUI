@@ -26,6 +26,7 @@
 		F537EE771409475000810734 /* RequestPasswordSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = F537EE761409475000810734 /* RequestPasswordSheet.xib */; };
 		F537EE7A14094A1D00810734 /* TSGDocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F537EE7914094A1D00810734 /* TSGDocumentWindowController.m */; };
 		F537EE7F14095D3100810734 /* TSGVerifyPasswordCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = F537EE7E14095D3100810734 /* TSGVerifyPasswordCommand.m */; };
+		F537EE83140974E900810734 /* TSGStreamingArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F537EE82140974E900810734 /* TSGStreamingArray.m */; };
 		F5F8C5141406D21B00FE5539 /* TSGBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8C5131406D21B00FE5539 /* TSGBackup.m */; };
 		F5F8C5181406D46300FE5539 /* TSGListArchivesCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8C5171406D46300FE5539 /* TSGListArchivesCommand.m */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,8 @@
 		F537EE7914094A1D00810734 /* TSGDocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGDocumentWindowController.m; sourceTree = "<group>"; };
 		F537EE7D14095D3100810734 /* TSGVerifyPasswordCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGVerifyPasswordCommand.h; sourceTree = "<group>"; };
 		F537EE7E14095D3100810734 /* TSGVerifyPasswordCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGVerifyPasswordCommand.m; sourceTree = "<group>"; };
+		F537EE81140974E900810734 /* TSGStreamingArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGStreamingArray.h; sourceTree = "<group>"; };
+		F537EE82140974E900810734 /* TSGStreamingArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGStreamingArray.m; sourceTree = "<group>"; };
 		F5F8C5121406D21B00FE5539 /* TSGBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGBackup.h; sourceTree = "<group>"; };
 		F5F8C5131406D21B00FE5539 /* TSGBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGBackup.m; sourceTree = "<group>"; };
 		F5F8C5161406D46300FE5539 /* TSGListArchivesCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGListArchivesCommand.h; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 		F51029ED1406CC4B00FB2B68 /* Tarsnap GUI */ = {
 			isa = PBXGroup;
 			children = (
+				F537EE80140974D400810734 /* Foundation */,
 				F536083614092E5700DCFEE2 /* Interface Stuff */,
 				F536082E14092DCC00DCFEE2 /* Tarsnap Interface */,
 				F51029EE1406CC4B00FB2B68 /* Supporting Files */,
@@ -238,6 +242,15 @@
 				F51029FC1406CC4B00FB2B68 /* TSGDocument.xib */,
 			);
 			name = "Main Window";
+			sourceTree = "<group>";
+		};
+		F537EE80140974D400810734 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				F537EE81140974E900810734 /* TSGStreamingArray.h */,
+				F537EE82140974E900810734 /* TSGStreamingArray.m */,
+			);
+			name = Foundation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +370,7 @@
 				F537EE741409472B00810734 /* TSGRequestPasswordWindowController.m in Sources */,
 				F537EE7A14094A1D00810734 /* TSGDocumentWindowController.m in Sources */,
 				F537EE7F14095D3100810734 /* TSGVerifyPasswordCommand.m in Sources */,
+				F537EE83140974E900810734 /* TSGStreamingArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
