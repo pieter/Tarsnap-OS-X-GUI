@@ -10,33 +10,37 @@
 #import "TSGBackup.h"
 #import "TSGBackupListLoader.h"
 #import "TSGRequestPasswordWindowController.h"
+#import "TSGDocumentWindowController.h"
 #import "TSGTarsnapKey.h"
 
 @interface TSGDocument ()
 - (void)loadBackupData;
 
+@property (readwrite, retain) NSArray *backups;
 @property (readwrite, retain) TSGTarsnapKey *key;
 @property (readwrite, retain) TSGBackupListLoader *loader;
 @property (readwrite, assign, getter=isLoading) BOOL loading;
 
+@property (retain) TSGDocumentWindowController *windowController;
 
 @end
 
 @implementation TSGDocument
-@synthesize requestPasswordWindow = i_requestPasswordWindow;
 
-@synthesize backupsController = i_backupsController, loader = i_loader, loading = i_loading, key = i_key;
+@synthesize key = i_key;
+@synthesize backups = i_backups;
 
-- (NSString *)windowNibName
+@synthesize windowController = i_windowController;
+@synthesize loader = i_loader;
+@synthesize loading = i_loading;
+
+- (void)makeWindowControllers
 {
-    return @"TSGDocument";
-}
+    // We currently only have one window controller
+    self.windowController = [[[TSGDocumentWindowController alloc] init] autorelease];
+    [self addWindowController:self.windowController];
 
-- (void)windowControllerDidLoadNib:(NSWindowController *)aController
-{
-    [super windowControllerDidLoadNib:aController];
     [self.key performPasswordRequiredCheck];
-//    [self loadBackupData];
 }
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
@@ -48,7 +52,7 @@
     
     self.key = [[[TSGTarsnapKey alloc] initWithKeyURL:self.fileURL] autorelease];
     self.key.delegate = self;
-    
+
     return YES;
 }
 
@@ -60,9 +64,9 @@
 - (void)loadBackupData;
 {
     self.loader = [[[TSGBackupListLoader alloc] initWithKeyURL:self.fileURL] autorelease];
-    
+    self.backups = [NSArray array];
     [self.loader loadListWithItemCallback:^(TSGBackup *item) {
-        [self.backupsController addObject:item]; 
+        self.backups = [self.backups arrayByAddingObject:item];
     } finishedCallback:^() {
         self.loader = nil;
         self.loading = NO;
@@ -70,23 +74,21 @@
     self.loading = YES;
 }
 
-- (IBAction)deleteSelectedBackups:(id)theSender;
+- (IBAction)deleteBackupsWithNames:(NSArray *)theBackupNames;
 {
-    NSArray *selectedBackups = [self.backupsController selectedObjects];
-    NSArray *selectedNames = [selectedBackups valueForKey:@"name"];
-    if ([selectedNames count] == 0)
+    if ([theBackupNames count] == 0)
         return;
 
-    NSString *warning = nil;
-    if ([selectedNames count] == 1)
-        warning = [NSString stringWithFormat:@"Are you sure you want to delete '%@'?", [selectedNames objectAtIndex:0]];
-    else
-        warning = [NSString stringWithFormat:@"Are you sure you want to delete %lu backups?", [selectedNames count]];
-
-    NSAlert *alert = [NSAlert alertWithMessageText:warning defaultButton:@"Delete" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"This action is irreversible"];
-    alert.alertStyle = NSCriticalAlertStyle;
-    CFRetain(selectedNames);
-    [alert beginSheetModalForWindow:[[[self windowControllers] objectAtIndex:0] window] modalDelegate:self didEndSelector:@selector(backupDeleteAlertDidEnd:returnCode:contextInfo:) contextInfo:(void *)selectedNames];
+//    NSString *warning = nil;
+//    if ([theBackupNames count] == 1)
+//        warning = [NSString stringWithFormat:@"Are you sure you want to delete '%@'?", [selectedNames objectAtIndex:0]];
+//    else
+//        warning = [NSString stringWithFormat:@"Are you sure you want to delete %lu backups?", [selectedNames count]];
+//
+//    NSAlert *alert = [NSAlert alertWithMessageText:warning defaultButton:@"Delete" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"This action is irreversible"];
+//    alert.alertStyle = NSCriticalAlertStyle;
+//    CFRetain(selectedNames);
+//    [alert beginSheetModalForWindow:[[[self windowControllers] objectAtIndex:0] window] modalDelegate:self didEndSelector:@selector(backupDeleteAlertDidEnd:returnCode:contextInfo:) contextInfo:(void *)selectedNames];
 }
 
 - (void)backupDeleteAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
@@ -113,7 +115,6 @@
 #pragma Key delegate callbacks
 - (void)tarsnapKey:(TSGTarsnapKey *)theKey requiresPassword:(BOOL)theRequiresPassword;
 {
-    NSLog(@"Goti t back! %i", theRequiresPassword);
     if (!theRequiresPassword)
         [self loadBackupData];
     else {

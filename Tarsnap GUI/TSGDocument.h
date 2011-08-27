@@ -12,11 +12,10 @@
 @interface TSGDocument : NSDocument<TSGTarsnapKeyDelegate> {
 }
 
+@property (readonly, retain) NSArray *backups;
 @property (readonly, retain) TSGTarsnapKey *key;
-@property (retain) IBOutlet NSArrayController *backupsController;
 @property (readonly, assign, getter=isLoading) BOOL loading;
-@property (assign) IBOutlet NSWindow *requestPasswordWindow;
 
-- (IBAction)deleteSelectedBackups:(id)theSender;
+- (IBAction)deleteBackupsWithNames:(NSArray *)theBackupNames;
 
 @end
